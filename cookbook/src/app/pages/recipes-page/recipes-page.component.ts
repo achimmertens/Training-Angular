@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core'
 import { Router } from '@angular/router'
 import { Subscription } from 'rxjs'
-import { Recipe, RecipesService } from 'src/app/services/recipes.service'
+import { Recipe, RecipesService } from '../../services/recipes.service'
 
 @Component({
   selector: 'app-recipes-page',
@@ -11,7 +11,10 @@ import { Recipe, RecipesService } from 'src/app/services/recipes.service'
 export class RecipesPageComponent implements OnDestroy {
   recipes: Recipe[] = []
   // recipesServiceSubscription: Subscription
-  constructor(private router: Router, protected recipesService: RecipesService) {
+  constructor(
+    private router: Router,
+    protected recipesService: RecipesService
+  ) {
     // this.recipes = recipesService.getAll()
     // this.recipesServiceSubscription = recipesService.getAllObservable().subscribe({
     //   next: (list) => this.recipes = list,
@@ -37,5 +40,5 @@ export class RecipesPageComponent implements OnDestroy {
     } else {
       this.recipes = this.recipesService.getAll()
     }
-  } 
+  }
 }

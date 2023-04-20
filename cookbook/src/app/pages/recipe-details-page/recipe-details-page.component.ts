@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core'
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Subscription, switchMap } from 'rxjs'
-import { Recipe, RecipesService } from 'src/app/services/recipes.service'
+import { Recipe, RecipesService } from '../../services/recipes.service'
 
 @Component({
   selector: 'app-recipe-details-page',

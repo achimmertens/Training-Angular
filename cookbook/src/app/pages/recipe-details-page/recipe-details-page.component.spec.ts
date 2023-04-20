@@ -1,23 +1,15 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
-import testBedConfiguration from 'src/app/testBedConfiguration'
+import '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/angular'
 
-import { RecipeDetailsPageComponent } from './recipe-details-page.component'
+import testBedConfiguration from '../../testBedConfiguration'
 
 describe('RecipeDetailsPageComponent', () => {
-  let component: RecipeDetailsPageComponent
-  let fixture: ComponentFixture<RecipeDetailsPageComponent>
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule(
-      testBedConfiguration
-    ).compileComponents()
-
-    fixture = TestBed.createComponent(RecipeDetailsPageComponent)
-    component = fixture.componentInstance
-    fixture.detectChanges()
-  })
-
-  it('should create', () => {
-    expect(component).toBeTruthy()
+  it.only('should create', async () => {
+    await render('<app-recipe-details-page></app-recipe-details-page>', {
+      ...testBedConfiguration,
+    })
+    screen.logTestingPlaygroundURL()
+    const nextButton = screen.getByRole('button', { name: /nächstes rezept/i })
+    expect(nextButton).toBeEnabled()
   })
 })

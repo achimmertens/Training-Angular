@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { Router } from '@angular/router'
-import { Recipe, RecipesService } from 'src/app/services/recipes.service'
+import { Recipe, RecipesService } from '../../services/recipes.service'
 
 @Component({
   selector: 'app-recipe-new-page',
