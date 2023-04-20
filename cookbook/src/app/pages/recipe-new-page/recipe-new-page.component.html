@@ -1,0 +1,21 @@
+<form>
+  <label>
+    <span>Name</span>
+    <input type="text" [(ngModel)]="neuesRezept.name" name="name" />
+  </label>
+
+  <label>
+    <span>Anleitung</span>
+    <textarea
+      [(ngModel)]="neuesRezept.instructions"
+      name="instructions"
+    ></textarea>
+  </label>
+
+  <div>
+    <scale-button type="button" (click)="handleSave()">Speichern</scale-button>
+    <scale-button type="button" (click)="handleCancel()">
+      Abbrechen</scale-button
+    >
+  </div>
+</form>

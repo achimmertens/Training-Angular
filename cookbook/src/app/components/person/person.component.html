@@ -1,0 +1,12 @@
+<p>person works!</p>
+<h2>{{ personName }}</h2>
+<ul *ngIf="details">
+  <li
+    *ngFor="let detail of details; index as i"
+    style="display: flex; gap: 1em;"
+  >
+    <button (click)="removeDetail(i)">Loeschen</button>
+    <span>{{ i + 1 }}. {{ detail }}</span>
+  </li>
+</ul>
+<scale-button (click)="handleClick($event)">Hinzufügen</scale-button>

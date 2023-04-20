@@ -1,0 +1,24 @@
+<div style="display: flex; flex-direction: column; gap: 1em;">
+  <scale-button (click)="handleNewClick()">Neues Rezept</scale-button>
+  <div>
+    <input placeholder="Filter" type="text" (keyup)="handleChange($event)" />
+    <h3>Ohne async pipe</h3>
+    <ul *ngFor="let recipe of recipes; index as i">
+      <li>
+        <a routerLink="{{ recipe.id }}">{{ recipe.name }}</a>
+      </li>
+    </ul>
+    <h3>Mit async pipe</h3>
+    <scale-button (click)="recipesService.refresh()">Refresh</scale-button>
+    <scale-loading-spinner
+      *ngIf="(recipesService.status$ | async) !== 'done'"
+    ></scale-loading-spinner>
+    <ng-container *ngIf="(recipesService.status$ | async) === 'done'">
+      <ul *ngFor="let recipe of recipesService.recipes$ | async; index as i">
+        <li>
+          <a routerLink="{{ recipe.id }}">{{ recipe.name }}</a>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</div>

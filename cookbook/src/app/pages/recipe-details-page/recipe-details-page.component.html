@@ -1,0 +1,84 @@
+<div style="display: flex; gap: 1em; justify-content: space-between;">
+  <scale-button *ngIf="!editMode" (click)="handleEditClick()"
+    >Editieren</scale-button
+  >
+  <scale-button
+    *ngIf="editMode"
+    (click)="handleSaveClick()"
+    [disabled]="saveDisabled"
+    >Speichern</scale-button
+  >
+  <scale-button (click)="handleNext()">Nächstes Rezept</scale-button>
+</div>
+<h2>Details zum Rezept {{ recipe?.id }}: {{ recipe?.name }}</h2>
+<div *ngIf="!editMode">
+  <h3>Anweisungen</h3>
+  <div *ngIf="recipe?.instructions">
+    {{ recipe?.instructions }}
+  </div>
+
+  <ul *ngIf="recipe && recipe.ingredients">
+    <li *ngFor="let ingredient of recipe.ingredients">
+      <div>
+        <span>{{ ingredient.name }}</span>
+        <span>{{ ingredient.amount }}</span>
+      </div>
+    </li>
+  </ul>
+</div>
+<form *ngIf="editMode" [formGroup]="recipeFormGroup">
+  <label>
+    <span>Id</span>
+    <input formControlName="id" readonly />
+  </label>
+  <label>
+    <span>Name</span>
+    <input formControlName="name" />
+    <span
+      class="error"
+      *ngIf="recipeFormGroup.get('name')?.errors?.['minlength']"
+      >Muss mindestens 3 Zeichen lang sein</span
+    >
+    <span
+      class="error"
+      *ngIf="recipeFormGroup.get('name')?.errors?.['required']"
+      >Muss mindestens angegeben werden</span
+    >
+  </label>
+  <label>
+    <span>Anweisungen</span>
+    <textarea formControlName="instructions"></textarea>
+  </label>
+
+  <fieldset formArrayName="ingredients">
+    <legend>Zutaten</legend>
+    <scale-button type="button" (click)="handleAddIngredient()"
+      >Neue</scale-button
+    >
+    <ng-container
+      *ngFor="let ingredientForm of ingredients.controls; let i = index"
+    >
+      <div [formGroupName]="i">
+        <label>
+          <span>Name</span>
+          <input
+            [id]="'ingredients.' + i + '.name'"
+            type="text"
+            formControlName="name"
+          />
+        </label>
+        <label>
+          <span>Menge</span>
+          <input
+            [id]="'ingredients.' + i + '.amount'"
+            type="text"
+            formControlName="amount"
+          />
+        </label>
+        <scale-button type="button" (click)="ingredients.removeAt(i)"
+          >Entfernen</scale-button
+        >
+      </div>
+    </ng-container>
+  </fieldset>
+</form>

@@ -1,0 +1,25 @@
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+form label {
+  display: flex;
+  flex-direction: column;
+}
+
+form > div {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+form input[readonly] {
+  color: #444444;
+  background-color: #eeeeee;
+}
+
+form label span.error {
+  color: red;
+}

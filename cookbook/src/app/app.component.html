@@ -1,0 +1,10 @@
+<h2 class="titleCssClass">Hallo Kochbuch</h2>
+<nav>
+  <app-main-navigation></app-main-navigation>
+</nav>
+<main>
+  <router-outlet></router-outlet>
+</main>
+<footer>
+  {{ (recipesService.recipes$ | async)?.length }} Rezepte im Backend
+</footer>
